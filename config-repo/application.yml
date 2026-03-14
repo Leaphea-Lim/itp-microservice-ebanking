@@ -1,0 +1,4 @@
+service:
+  info: IT Profession - Microservice
+  tag: itp
+  version: 1.0
