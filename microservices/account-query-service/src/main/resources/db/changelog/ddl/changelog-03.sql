@@ -1,0 +1,16 @@
+-- changelog 02
+ALTER TABLE accounts
+    ADD COLUMN IF NOT EXISTS balance DECIMAL;
+
+ALTER TABLE accounts
+    ADD COLUMN IF NOT EXISTS currency VARCHAR(5);
+
+ALTER TABLE accounts ADD COLUMN account_type_code VARCHAR(50);
+
+-- changeset LENOVO:add-audit-columns-to-accounts
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ;
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS created_by VARCHAR(255);
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ;
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS updated_by VARCHAR(255);
+
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS version INTEGER;

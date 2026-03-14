@@ -1,0 +1,58 @@
+server:
+  port: 9990
+
+spring:
+  application:
+    name: front-bff
+
+#  profiles:
+#    active: dev
+#  config:
+#    import: optional:configserver:http://localhost:8888
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
+              lower-case-service-id: true
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credential
+            - SaveSession
+            - TokenRelay=
+          routes:
+          - id: device-service
+            uri: lb://device-service
+            predicates:
+                - Path=/api/v1/device/**
+
+          - id: frontbff
+            uri: http://localhost:3000
+            predicates:
+              - Path=/**
+
+  security:
+    oauth2:
+      client:
+        provider:
+          itp-frontbff:
+            issuer-uri: http://localhost:9090
+
+            user-info-uri: http://localhost:9090/userinfo
+        registration:
+          itp-frontbff:
+            provider: itp-frontbff
+            client-id: itp-frontbff
+            client-secret: qwerqwer
+            redirect-uri: http://localhost:9990/login/oauth2/code/itp-frontbff
+            authorization-grant-type:
+              - authorization_code
+            scope:
+              - openid # Auto issue access token
+              - profile # Get profile
+              - email # Get email
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090

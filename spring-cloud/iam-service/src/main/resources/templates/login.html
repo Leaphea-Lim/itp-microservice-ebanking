@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - IAM Server</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #cfffec 0%, #f1fffc 100%);
+        }
+        /*.gradient-btn {*/
+        /*    background: linear-gradient(135deg, #d3d3d3 0%, #f1fffc 100%);*/
+        /*}*/
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-5">
+<div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-12">
+    <h2 class="text-3xl font-semibold text-center text-gray-800 mb-2">Welcome Back</h2>
+    <p class="text-center text-gray-500 text-sm mb-8">Please login to your account</p>
+
+    <!-- Error message when credentials are wrong -->
+    <div th:if="${param.error}" class="bg-red-50 border-l-4 border-red-500 text-red-700 p-3 rounded-lg mb-5 text-sm text-center">
+        Invalid username or password.
+    </div>
+
+    <!-- Message when logged out successfully -->
+    <div th:if="${param.logout}" class="bg-green-50 border-l-4 border-green-500 text-green-700 p-3 rounded-lg mb-5 text-sm text-center">
+        You have been logged out successfully.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <!-- CSRF protection - Thymeleaf automatically includes it if security is enabled -->
+<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+        <div class="mb-5">
+            <label for="username" class="hidden">Username</label>
+            <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required
+                    autofocus
+                    placeholder="Email address"
+                    class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-100 transition duration-200"
+            />
+        </div>
+
+        <div class="mb-5">
+            <label for="password" class="hidden">Password</label>
+            <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    placeholder="Password"
+                    class="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-100 transition duration-200"
+            />
+        </div>
+
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center">
+                <input
+                        type="checkbox"
+                        id="remember-me"
+                        name="remember-me"
+                        class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer"
+                />
+                <label for="remember-me" class="ml-2 text-sm text-gray-600 cursor-pointer">Remember me</label>
+            </div>
+            <a href="#" class="text-sm text-gray-500 hover:text-indigo-600 transition duration-200">Forgot Password?</a>
+        </div>
+
+        <button
+                type="submit"
+                class="w-full bg-gray-200 text-black font-semibold py-3.5 rounded-lg  hover:shadow-sm"
+        >
+            Log In
+        </button>
+    </form>
+</div>
+</body>
+</html>

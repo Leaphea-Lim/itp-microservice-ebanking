@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.42/8365263844ebb62398e0dc33057ba10ba472d3b8/lombok-1.18.42.jar" />
+        </processorPath>
+        <module name="itp-ebanking-istad.common.main" />
+        <module name="itp-ebanking-istad.spring-cloud.gateway-server.main" />
+        <module name="itp-ebanking-istad.spring-cloud.iam-service.main" />
+        <module name="itp-ebanking-istad.microservices.pipeline-service.main" />
+        <module name="itp-ebanking-istad.spring-cloud.front-bff.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.42/8365263844ebb62398e0dc33057ba10ba472d3b8/lombok-1.18.42.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.6.3/52e345c907fbf173b376586c7f8b131d53fa5867/mapstruct-processor-1.6.3.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok-mapstruct-binding/0.2.0/2f1cf9ced7b720ba4996c942b816669e63f0fa4f/lombok-mapstruct-binding-0.2.0.jar" />
+        </processorPath>
+        <module name="itp-ebanking-istad.microservices.customer-service.main" />
+      </profile>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.42/8365263844ebb62398e0dc33057ba10ba472d3b8/lombok-1.18.42.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mapstruct/mapstruct-processor/1.6.3/52e345c907fbf173b376586c7f8b131d53fa5867/mapstruct-processor-1.6.3.jar" />
+        </processorPath>
+        <module name="itp-ebanking-istad.microservices.account-query-service.main" />
+        <module name="itp-ebanking-istad.microservices.account-service.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="21">
+      <module name="account-service" target="21" />
+      <module name="account-service.main" target="21" />
+      <module name="account-service.test" target="21" />
+      <module name="customer-service" target="21" />
+      <module name="customer-service.main" target="21" />
+      <module name="customer-service.test" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.admin-bff.main" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.admin-bff.test" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.configserver.main" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.configserver.test" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.eurekaserver.main" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.eurekaserver.test" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.front-bff.main" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.front-bff.test" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.gateway-server.main" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.gateway-server.test" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.iam-service.main" target="21" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.iam-service.test" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account-service" options="-parameters" />
+      <module name="account-service.main" options="-parameters" />
+      <module name="account-service.test" options="-parameters" />
+      <module name="customer-service" options="-parameters" />
+      <module name="customer-service.main" options="-parameters" />
+      <module name="customer-service.test" options="-parameters" />
+      <module name="itp-ebanking-istad.common" options="-parameters" />
+      <module name="itp-ebanking-istad.common.main" options="-parameters" />
+      <module name="itp-ebanking-istad.common.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.account-query-service" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.account-query-service.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.account-query-service.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.account-service" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.account-service.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.account-service.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.customer-service" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.customer-service.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.customer-service.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.pipeline-service" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.pipeline-service.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.pipeline-service.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.admin-bff.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.admin-bff.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.configserver.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.configserver.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.eurekaserver.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.eurekaserver.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.front-bff.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.front-bff.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.gateway-server.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.gateway-server.test" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.iam-service.main" options="-parameters" />
+      <module name="itp-ebanking-istad.microservices.spring-cloud.iam-service.test" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.admin-bff" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.admin-bff.main" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.admin-bff.test" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.configserver" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.configserver.main" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.configserver.test" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.eurekaserver" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.eurekaserver.main" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.eurekaserver.test" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.front-bff" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.front-bff.main" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.front-bff.test" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.gateway-server" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.gateway-server.main" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.gateway-server.test" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.iam-service" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.iam-service.main" options="-parameters" />
+      <module name="itp-ebanking-istad.spring-cloud.iam-service.test" options="-parameters" />
+    </option>
+  </component>
+</project>

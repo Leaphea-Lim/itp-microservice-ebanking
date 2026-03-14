@@ -1,0 +1,103 @@
+services:
+  pg-itp-micro-db:
+    image: postgres:17.5-bullseye
+    container_name: pg-itp-micro-db
+    environment:
+      POSTGRES_USER: itpusr
+      POSTGRES_PASSWORD: itp@168
+    ports:
+      - "16851:5432"
+    volumes:
+      - ./init_scripts/pg_itp_micro_init.sql:/docker-entrypoint-initdb.d/pg_itp_micro_init.sql
+      - pg-itp-micro-vol:/var/lib/postgresql/data
+    networks:
+      - itp-net
+
+
+  pg-itp-iam-db:
+    image: postgres:17.5-bullseye
+    container_name: pg-itp-iam-db
+    environment:
+      POSTGRES_USER: itpusr
+      POSTGRES_PASSWORD: itp@168
+    ports:
+      - "16852:5432"
+    volumes:
+      - ./init_scripts/pg_itp_iam_init.sql:/docker-entrypoint-initdb.d/pg_itp_iam_init.sql
+      - pg-itp-iam-vol:/var/lib/postgresql/data
+    networks:
+      - itp-net
+
+  pg-itp-cdc-db:
+    image: postgres:17.5-bullseye
+    container_name: pg-itp-cdc-db
+    environment:
+      POSTGRES_USER: itpusr
+      POSTGRES_PASSWORD: itp@168
+      POSTGRES_DB: cdc_inventory_db
+    ports:
+      - "16853:5432"
+    volumes:
+      - ./init_scripts/pg_itp_cdc_init.sql:/docker-entrypoint-initdb.d/pg_itp_cdc_init.sql
+      - pg-itp-cdc-vol:/var/lib/postgresql/data
+    networks:
+      - itp-net
+  
+  pg-device-db:
+    image: postgres:17.5-bullseye
+    container_name: device-db
+    environment:
+      POSTGRES_USER: device
+      POSTGRES_PASSWORD: qwer
+      POSTGRES_DB: device_db
+    ports:
+      - "1681:5432"
+    volumes:
+      - device-db:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - itp-net
+
+  pg-mac-db:
+    image: postgres:17.5-bullseye
+    container_name: mac-db
+    environment:
+      POSTGRES_USER: mac
+      POSTGRES_PASSWORD: qwer
+      POSTGRES_DB: mac_db
+    ports:
+      - "1682:5432"
+    volumes:
+      - mac-db:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - itp-net
+
+  itp-postgres:
+    image: postgres:17.5-bullseye
+    container_name: itp-postgres
+    environment:
+      POSTGRES_USER: itpusr
+      POSTGRES_PASSWORD: itp@168
+      POSTGRES_DB: itp_main_db
+    ports:
+      - "5168:5432"
+    volumes:
+      - ./init_scripts/postgres_init.sql:/docker-entrypoint-initdb.d/postgres_init.sql
+      - itp-postgres-vol:/var/lib/postgresql/data
+    networks:
+      - itp-net
+
+# Create docker volume
+volumes:
+  pg-itp-micro-vol:
+  pg-itp-iam-vol:
+  pg-itp-cdc-vol:
+  device-db:
+  mac-db:
+  itp-postgres:
+
+# Bind network
+networks:
+  itp-net:
+    external: true

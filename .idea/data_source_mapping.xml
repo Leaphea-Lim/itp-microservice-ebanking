@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/439fcb28-55c1-4410-b292-dd12f30e2e03/console.sql" value="439fcb28-55c1-4410-b292-dd12f30e2e03" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/439fcb28-55c1-4410-b292-dd12f30e2e03/console_1.sql" value="439fcb28-55c1-4410-b292-dd12f30e2e03" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/439fcb28-55c1-4410-b292-dd12f30e2e03/console_2.sql" value="439fcb28-55c1-4410-b292-dd12f30e2e03" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/439fcb28-55c1-4410-b292-dd12f30e2e03/console_3.sql" value="439fcb28-55c1-4410-b292-dd12f30e2e03" />
+    <file url="file://$PROJECT_DIR$/microservices/account-query-service/src/main/resources/db/changelog/data/changelog-01-provider.sql" value="439fcb28-55c1-4410-b292-dd12f30e2e03" />
+  </component>
+</project>

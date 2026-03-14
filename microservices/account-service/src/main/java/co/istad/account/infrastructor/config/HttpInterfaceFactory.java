@@ -1,0 +1,49 @@
+package co.istad.account.infrastructor.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.support.WebClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+
+@Component
+@RequiredArgsConstructor
+public class HttpInterfaceFactory {
+
+    private final WebClient.Builder loadBalancedWebClientBuilder;
+
+    //create normal web client without load-balance
+    public <T> T createNormalClient(String baseUrl, Class<T> interfaceClass) {
+
+        //creat web client object
+        WebClient webClient = WebClient.builder()
+                .baseUrl(baseUrl)
+                .build();
+        return createClient(webClient, interfaceClass);
+    }
+
+    //2nd method invoke 1st method
+    public <T> T createLoadBalanceClient(String baseUrl, Class<T> interfaceClass) {
+
+//        //creat client credential
+//        var oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(
+//                oAuth2AuthorizedClientManager
+//        );
+//        oauth2.setDefaultClientRegistrationId("itp-standard");
+
+        //creat web client object
+        WebClient webClient = loadBalancedWebClientBuilder
+                .baseUrl(baseUrl)
+//                .apply(oauth2.oauth2Configuration())
+                .build();
+        return createClient(webClient, interfaceClass);
+    }
+
+    //1st method
+    public <T> T createClient(WebClient webClient, Class<T> interfaceClass) {
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory
+                .builderFor(WebClientAdapter.create(webClient))
+                .build();
+        return factory.createClient(interfaceClass);
+    }
+}

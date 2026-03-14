@@ -1,0 +1,146 @@
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    prefer-ip-address: true
+
+server:
+  port: 20262
+
+spring:
+  application:
+    name: pipeline
+
+  cloud:
+    function:
+                #  use JSON      ;  String
+      definition: processProduct;processMessage;processProductDetail;processProductDebezium;processDebeziumRecordXml;captureDebeziumRecordXml;captureXmlData;consumeDbzEvent;captureEnvelope
+    stream:
+      bindings:  #input message channel that binding/connect into kafka topics
+        # 0 is for multi input/output function
+        processProductDetail-in-0:
+          destination: product-detail
+          group: monitor-group2
+          content-type: application/json
+        captureEnvelope-in-0:
+          destination: ITP.CORE_BANKING.RECORD_XML
+          group: record_xml_2
+        processProduct-in-0:
+          destination: test-product # topic_name
+          group: monitor-group # consumer_group_id
+          content-type: application/json
+        processMessage-in-0:
+          destination: test-topic
+        processProductDetail-out-0:
+          destination: processed-messages-detail
+          content-type: application/json
+        processProductDebezium-in-0:
+          destination: cdc.public.product
+          group: monitor-group2
+          content-type: application/*+avro
+          consumer:
+            use-native-decoding: true  #lets Kafka handle Avro deserialization into GenericRecord.
+        processProductDebezium-out-0:
+          destination: process-product
+          content-type: application/json
+          #recordXml
+        processDebeziumRecordXml-in-0:
+          destination: ITP.CORE_BANKING.RECORD_XML
+          group: debezium-xml-consumer-group
+          content-type: application/*+avro
+          consumer:
+            use-native-decoding: true
+        consumeDbzEvent-in-0:
+          destination: ITP.CORE_BANKING.RECORD_XML
+          group: record_xml_1
+        consumeDbzEvent-out-0:
+          destination: cleaned_record
+          content-type: application/json
+        captureXmlData-in-0:
+          destination: ITP.CORE_BANKING.RECORD_XML
+          group: debezium-xml-consumer-group6
+          content-type: application/*+avro
+#          consumer:
+#            use-native-decoding: true
+
+
+      kafka:
+        binder:
+          brokers: localhost:29092,localhost:29094,localhost:29096
+          configuration:
+            auto.offset.reset: latest
+            schema.registry.url: http://localhost:8081 #points to your Confluent Schema Registry.
+        bindings:
+          # Avro-specific configuration for Debezium consumer
+          processProductDebezium-in-0:
+            consumer:
+              configuration:
+                key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                schema.registry.url: http://localhost:8081
+                specific.avro.reader: false
+          consumeDbzEvent-in-0:
+            consumer:
+              configuration:
+                key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                schema.registry.url: http://localhost:8081
+                specific.avro.reader: false
+          captureEnvelope-in-0:
+            consumer:
+              configuration:
+                key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+                schema.registry.url: http://localhost:8081
+                specific.avro.reader: true
+
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://localhost:8888
+
+  security:
+    oauth2:
+      client:
+        provider:
+          itp-standard:
+            issuer-uri: http://localhost:9090
+        registration:
+          itp-standard:
+            provider: itp-standard
+            client-id: itp-standard
+            client-secret: qwerqwer
+            redirect-uri: http://localhost:9999/login/oauth2/code/itp-standard
+            authorization-grant-type: client_credentials
+            scope:
+              - openid # Auto issue access token
+              - profile # Get profile
+              - email # Get email
+        resourceserver:
+          jwt:
+            issuer-uri: http://localhost:9090
+
+#Resilience4j
+resilience4j:
+  circuitbreaker:
+    instances:
+      accountClientCB:
+        sliding-window-size: 10
+        permitted-number-of-calls-in-half-open-state: 2 #number of request
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 10s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#  health:
+#    circuitbreakers:
+#      enabled: true
+#  endpoint:
+#    health:
+#      show-details: always
+logging:
+  level:
+    co.istad.pipeline: DEBUG
+
